@@ -9,35 +9,52 @@ import java.util.Date;
 /**
  * Data
  */
-public class Data {
+public class Data implements Comparable<Data>{
     private Date data;
     private ArrayList<Compromisso> compromissos = new ArrayList<>();
 
-    Data(String date){
-        this.data = converterStringParaDate(date);
+    Data(Date date){
+        this.data = date;
     }
 
     public Date getData(){
         return this.data;
     }
 
-     /**
-     * Converte a data em String para Date    
-     * @param data Data em String
-     * @return Data em Date
-     */
-    private Date converterStringParaDate(String data) {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date dataFormatada;
-
-        try {
-            dataFormatada = formatter.parse(data);
-        } catch (ParseException e) {
-            dataFormatada = new Date();
-        }
-
-        return dataFormatada;
+    public ArrayList<Compromisso> getCompromissos(){
+        return this.compromissos;
     }
+
+    public void novoCompromissoData(Compromisso compromisso){
+        this.compromissos.add(compromisso);
+    }
+
+
+  @Override
+  public int compareTo(Data o) {
+    if (getData() == null || o.getData() == null)
+      return 0;
+    return getData().compareTo(o.getData());
+  }
+
+
+    //  /**
+    //  * Converte a data em String para Date    
+    //  * @param data Data em String
+    //  * @return Data em Date
+    //  */
+    // private Date converterStringParaDate(String data) {
+    //     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    //     Date dataFormatada;
+
+    //     try {
+    //         dataFormatada = formatter.parse(data);
+    //     } catch (ParseException e) {
+    //         dataFormatada = new Date();
+    //     }
+
+    //     return dataFormatada;
+    // }
 
 
     
