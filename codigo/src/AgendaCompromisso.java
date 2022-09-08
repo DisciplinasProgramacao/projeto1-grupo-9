@@ -81,8 +81,7 @@ public class AgendaCompromisso {
      * Senão, cria uma nova data, adiciona-a ao array e retorna-a
      * @param data data em Date
      */
-    private Data acharEmDatas(Date data) {
-        Data novaData = new Data(data);
+    public Data acharEmDatas(Date data) {
 
         for (int i = 0; i < this.datas.size(); i++) {
             if (this.datas.get(i).getData().equals(data)) {
@@ -90,6 +89,7 @@ public class AgendaCompromisso {
             }
         }
 
+        Data novaData = new Data(data);
         this.datas.add(novaData);
         return this.datas.get(this.datas.size() - 1);
     }
@@ -104,7 +104,7 @@ public class AgendaCompromisso {
      * @param data Data em String
      * @return Data em Date
      */
-    private Date converterStringParaDate(String data) {
+    public Date converterStringParaDate(String data) {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date dataFormatada;
 
@@ -129,6 +129,10 @@ public class AgendaCompromisso {
         String dataFormatada = formatter.format(data);
 
         return dataFormatada;
+    }
+
+    public ArrayList<Data> getDatas(){
+        return this.datas;
     }
 
 }
