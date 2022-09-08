@@ -11,6 +11,14 @@ public class AgendaCompromisso {
 
     private ArrayList<Data> datas = new ArrayList<>();
 
+    /**
+     * Adiciona um novo compromisso à agenda
+     * @param data Data do crompromisso no formato "DD/MM/AAAA". Caso passada no formato
+     * errado, sera setada a data de hoje
+     * @param descricao Descricao do compromisso : String
+     * @param frequenciaRepeticao De quantos em quantos dias ocorrerá a repetição do compromisso : int
+     * @param quantidadeRepeticao Quantas vezes a repetição ocorrerá : int
+     */
     public void adicionarCompromisso(String data, String descricao, int frequenciaRepeticao, int quantidadeRepeticao) {
         Date dataFormadatada = converterStringParaDate(data);
         Data date = acharEmDatas(dataFormadatada);
@@ -23,6 +31,10 @@ public class AgendaCompromisso {
 
     }
 
+    /**
+     * Gera o relatório com os respectivos compromissos ordenados cronologicamente por data
+     * @return relatorio : String
+     */
     public String gerarRelatorio() {
         ArrayList<Data> temp = datas;
         temp.sort((d1, d2) -> d1.compareTo(d2));
@@ -42,6 +54,14 @@ public class AgendaCompromisso {
         return relatorio;
     }
 
+    /**
+     * Adiciona os compromissos às datas de acordo com a repetição
+     * e frequência desejada.
+     * @param dataInicial data de início em Date
+     * @param freq frquencia de execução : int
+     * @param quantid quantidade de repetições : int
+     * @param compromisso compromisso a ser repetido : Compromisso
+     */
     private void acionarRepeticao(Date dataInicial, int freq, int quantid, Compromisso compromisso) {
         Date dataRepeticao = dataInicial;
         for (int i = 0; i < quantid; i++) {
@@ -55,6 +75,12 @@ public class AgendaCompromisso {
 
     }
 
+    /**
+     * Pesquisa se a data já existe na agenda. 
+     * Caso exista, retorna-a.
+     * Senão, cria uma nova data, adiciona-a ao array e retorna-a
+     * @param data data em Date
+     */
     private Data acharEmDatas(Date data) {
         Data novaData = new Data(data);
 
@@ -103,28 +129,6 @@ public class AgendaCompromisso {
         String dataFormatada = formatter.format(data);
 
         return dataFormatada;
-    }
-
-    private ArrayList<Compromisso> organizaPorData(ArrayList<Compromisso> arrayCompromissos) {
-        int n = arrayCompromissos.size();
-        for (int i = 0; i < n - 1; i++) {
-
-            int min_element = i;
-            for (int j = i + 1; j < n; j++)
-                if (ehMaisAntiga(arrayCompromissos.get(j).getDataCompromisso(),
-                        arrayCompromissos.get(min_element).getDataCompromisso()))
-                    min_element = j;
-
-            Compromisso temp = arrayCompromissos.get(min_element);
-            arrayCompromissos.set(min_element, arrayCompromissos.get(i));
-            arrayCompromissos.set(i, temp);
-        }
-
-        return arrayCompromissos;
-    }
-
-    private boolean ehMaisAntiga(Date data1, Date data2) {
-        return data1.before(data2);
     }
 
 }

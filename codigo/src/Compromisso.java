@@ -1,10 +1,6 @@
 package src;
 
 import java.util.*;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Compromisso {
@@ -13,6 +9,13 @@ public class Compromisso {
     private int frequenciaRepeticao;
     private int quantidadeRepeticao;
 
+    /**
+     * @param data                Data do crompromisso : Date
+     * @param descricao           Descricao do compromisso : String
+     * @param frequenciaRepeticao De quantos em quantos dias ocorrerá a repetição do
+     *                            compromisso : int
+     * @param quantidadeRepeticao Quantas vezes a repetição ocorrerá : int
+     */
     Compromisso(Date data, String desc, int freqRepeticao, int quantRepeticao) {
 
         this.dataCompromisso = data;
@@ -21,19 +24,19 @@ public class Compromisso {
         this.quantidadeRepeticao = quantRepeticao;
     }
 
+    /**
+   * @return Descrição do compromisso com espaçamento
+   */
     public String dadosCompromisso() {
         String dados = "\n";
         dados += this.descricao + "\n";
 
-        if (this.frequenciaRepeticao > 0 && this.quantidadeRepeticao > 0) {
-            dados += "Repetindo de " + this.frequenciaRepeticao +
-                    " em " + this.frequenciaRepeticao + " dias, por " +
-                    this.quantidadeRepeticao + " vezes \n";
-        }
-
         return dados;
     }
 
+   /**
+   * @return Data do compromisso
+   */
     public Date getDataCompromisso() {
         return this.dataCompromisso;
     }
